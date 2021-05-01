@@ -1,8 +1,8 @@
 Package: cc.lingc.hook.qq
 Name: QQLingHook
-Version: 0.0.1
+Version: 0.1.2
 Architecture: iphoneos-arm
-Description: IOS QQ Tea和Ecdh Hook 插件!
+Description: IOS QQ Ecdh Hook 插件!
 Maintainer: 子呅
 Author: 子呅
 Section: Tweaks

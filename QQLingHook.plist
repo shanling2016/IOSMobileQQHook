@@ -1,1 +1,10 @@
-{ Filter = { Bundles = ( "com.tencent.mqq" ); }; }
+{ 
+    Filter = { 
+        Bundles = ( 
+            "com.tencent.mqq", 
+            "com.tencent.tim" 
+        ); 
+        Flage = 3;
+        Mode = Any;
+    };
+}

